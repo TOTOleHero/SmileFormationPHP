@@ -1,7 +1,5 @@
 <?php
 
-
-
 $login = $_POST['login'];
 $password = $_POST['password'];
 $firstName = $_POST['firstName'];
@@ -15,7 +13,8 @@ if (!empty($login) && !empty($password) && !empty($firstName) && !empty($lastNam
          
     if (!checkUser())  
     {
-        
+        createUser($login, $passwordw, $firstName,$lastName);
+        header('Location: ../html/login.html.php');
     }
     else    {
         echo "<div>" .
