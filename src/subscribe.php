@@ -2,10 +2,10 @@
 
 
 
-$login = $_POST[''];
-$password = $_POST[''];
-$firstName = $_POST[''];
-$lastName = $_POST[''];
+$login = $_POST['login'];
+$password = $_POST['password'];
+$firstName = $_POST['firstName'];
+$lastName = $_POST['lastName'];
 
 //je vérifie que toutes les info du formulaire sont là
 if (!empty($login) && !empty($password) && !empty($firstName) && !empty($lastName))   {
@@ -26,6 +26,6 @@ if (!empty($login) && !empty($password) && !empty($firstName) && !empty($lastNam
 else    {
     echo
         '<h2 class="title">Vous n\'avez pas rempli tous les champs!</h2>' .
-        '<a href="subscribe.php.php"><p class="erreur">Page précédente<p></a>' .
+        '<a href="../html/subscribe.html.php"><p class="erreur">Page precedente<p></a>' .
     '</div>'; }
 ?>
