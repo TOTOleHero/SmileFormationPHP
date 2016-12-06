@@ -7,6 +7,6 @@ function createSession(){
 
 
 function isConnected(){
-    
+    echo "toto";
     return true;
 }
