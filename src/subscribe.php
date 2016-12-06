@@ -2,8 +2,7 @@
 
 $login = $_POST['login'];
 $password = $_POST['password'];
-$firstName = $_POST['firstName'];
-$lastName = $_POST['lastName'];
+$name = $_POST['name'];
 
 //je vérifie que toutes les info du formulaire sont là
 if (!empty($login) && !empty($password) && !empty($firstName) && !empty($lastName))   {
@@ -11,9 +10,9 @@ if (!empty($login) && !empty($password) && !empty($firstName) && !empty($lastNam
      
     checkUser();
          
-    if (!checkUser())  
+    if (!checkUser($login, $passwordw))  
     {
-        createUser($login, $passwordw, $firstName,$lastName);
+        createUser($login, $passwordw, $name);
         header('Location: ../html/login.html.php');
     }
     else    {
