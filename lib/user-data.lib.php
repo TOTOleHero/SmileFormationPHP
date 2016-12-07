@@ -3,6 +3,8 @@
 define('USER_DATA', __DIR__."/../data/user.csv");
 define('INDEX_LOGIN', 0);
 define('INDEX_PW', 1);
+define('INDEX_ROLE', 4);
+
 
 function createUser($login,$password, $name) {
 
@@ -75,12 +77,34 @@ function checkUser($login, $password) {
 
 
 /**
- * converti un mot de passe en sha1
+ * convertit un mot de passe en sha1
  * @param string $password
  * @return string
  */
 function getConvertedPassword($password){
    return sha1($password);
 }
+
+function hasRole($login, $role)
+{
+    if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            if ($data[INDEX_LOGIN] == 'login') {
+                continue;
+            }
+            if ($data[INDEX_LOGIN] == $login && $data[INDEX_ROLE] == $role) {
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+function getUser()
+{
+    return TRUE;
+}
+
+
 
 ?>
