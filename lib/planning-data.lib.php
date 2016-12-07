@@ -35,4 +35,12 @@ function getData() {
             // References data table
             return $outputData;
         }
-}        
+} 
+
+
+
+function getDataAtDate($date = null){
+    
+    return 'In progress';
+    
+}
