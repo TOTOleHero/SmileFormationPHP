@@ -2,6 +2,7 @@
 
 define('EMAIL_SERVICE_URL','http://localhost:8888/sendEmail');
 
+
 /**
  *
  * send fake email
@@ -26,7 +27,6 @@ function sendEmail($dataEmail)
         "Content-Type : application/json"
     ]);
     $result = curl_exec($ch);
-
 
     if ($result == "send-ok") {
         return true;
