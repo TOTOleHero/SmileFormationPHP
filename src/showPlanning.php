@@ -2,12 +2,9 @@
 require '../lib/checksession.lib.php';
 require '../lib/planning-data.lib.php';
 
-if (isConnected() === FALSE)
-{
-    // redirect to login.php
+if (isConnected() === FALSE) {
+    header("Location: login.php");
 }
-else
-{
-    // send data to showPlanning.html
-    getData();
-}
+
+$outputData = getData();
+include('../html/showPlanning.html.php');
