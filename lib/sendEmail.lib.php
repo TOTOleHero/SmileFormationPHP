@@ -1,7 +1,18 @@
 <?php
 
 
-$data_string
+$data_string = [
+    
+    
+	"firstName" => "firstName",
+	"lastName" => "lastName",
+	"email" => "first@gmail.com",
+	"subject" => "subject",
+	"body" => "body"
+
+    
+    
+];  
 
     
 
