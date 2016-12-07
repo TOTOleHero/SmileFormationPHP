@@ -1,5 +1,5 @@
 <?php
-
+include '../html/subscribe.html.php';
 require_once '../lib/user-data.lib.php';
 
 $login = $_POST['login'];
@@ -12,5 +12,5 @@ if (!empty($login) && !empty($password) && !empty($name)) {
 
 
     createUser($login, $password, $name);
-    echo 'good';
+
 }
