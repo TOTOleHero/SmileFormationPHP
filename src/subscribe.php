@@ -5,10 +5,7 @@ $password = $_POST['password'];
 $name = $_POST['name'];
 
 //je vérifie que toutes les info du formulaire sont là
-if (!empty($login) && !empty($password) && !empty($firstName) && !empty($lastName))   {
- 
-     
-    checkUser();
+if (!empty($login) && !empty($password) && !empty($name)){
          
     if (!checkUser($login, $passwordw))  
     {

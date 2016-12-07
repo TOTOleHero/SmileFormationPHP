@@ -1,4 +1,5 @@
 <?php
+
 function createSession(){
 
     session_start();
@@ -9,7 +10,7 @@ function createSession(){
 }
 
 function isConnected(){
-    if($_SESSION["connected"]){
+    if(isset($_SESSION["connected"]) && $_SESSION["connected"]==true){
             return true;
     }
 
