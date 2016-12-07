@@ -7,7 +7,11 @@
     </head>
 
     <body>
-        <p>Veuillez entrer l'identifiant et le mot de passe :</p>
+        <p>Please enter your login and password</p><br>
+        
+            
+        <a href=" /src/subscribe.php">Create Account</a>
+            
         <?php 
            
             echo $error_msg;
