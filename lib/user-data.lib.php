@@ -87,19 +87,14 @@ function getConvertedPassword($password){
 
 function hasRole($login, $role)
 {
-    if (($handle = fopen(USER_DATA, "r")) !== FALSE)
-    {
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
-        {
-            if ($data[INDEX_LOGIN] == 'login')
-            {
+    if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            if ($data[INDEX_LOGIN] == 'login') {
                 continue;
             }
-            if ($data[INDEX_LOGIN] == $login && $data[INDEX_ROLE] == $role)
-            {
+            if ($data[INDEX_LOGIN] == $login && $data[INDEX_ROLE] == $role) {
                 return TRUE;
             }
-            return FALSE;
         }
     }
     return FALSE;
