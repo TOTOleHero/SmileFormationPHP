@@ -14,8 +14,7 @@
  *          ]
  * @return boolean si la session est créée
  */
-function createSession(Array $user)
-{
+function createSession(Array $user) {
 
 
     session_start();
@@ -38,23 +37,21 @@ function createSession(Array $user)
  *              "tel" => string tel
  *          ]
  */
-function getUserSession()
-{
-    session_start();
-
-    if (isset($_SESSION["user"]) && is_array($_SESSION["user"]) ) {
+function getUserSession() {
+    if (session_id() == "") {
+        session_start();
+    }
+    if (isset($_SESSION["user"]) && is_array($_SESSION["user"])) {
         return $_SESSION["user"];
     }
     return [];
 }
 
-
 /**
  * détruit la session en cours
  * @return boolean
  */
-function destroySession()
-{
+function destroySession() {
     session_start();
     // empty data
     $_SESSION = array();
@@ -70,8 +67,7 @@ function destroySession()
  *
  * @return boolean true if connected, false otherwhise
  */
-function isConnected()
-{
+function isConnected() {
 
     session_start();
 
