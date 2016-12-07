@@ -1,10 +1,10 @@
 <?php
 
 require '../lib/user-data.lib.php';
-include '../html/subscribe.html.php';
 
 if(isset($_POST['login']) && isset($_POST['password']) && isset($_POST['name'])){
     
+    preg_match("/^[a-zA-Z0-9]+$/", $_POST['login']);
     $login = $_POST['login'];
     $password = $_POST['password'];
     $name = $_POST['name'];
@@ -29,3 +29,5 @@ if(isset($_POST['login']) && isset($_POST['password']) && isset($_POST['name']))
 else{
     echo'Veuillez remplir le formulaire';
 }
+
+include '../html/subscribe.html.php';
