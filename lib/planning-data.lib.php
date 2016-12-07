@@ -41,6 +41,20 @@ function getData() {
 
 function getDataAtDate($date = null){
     
-    return 'In progress';
+    if ($date == null){
+        $date = date("Ymd");
+    }elseif (preg_match('/^20\d{2}[01]\d[0123]\d$/', $date) === 0) {
+        echo 'Date not valid, format must be YYYYMMDD';        
+    }
+    
+    $data = getData();
+
+    
+    foreach ($data as $value) {
+        if ($value['date'] == $date){
+            return $value['label'];
+        }
+    }
+     
     
 }
