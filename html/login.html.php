@@ -8,12 +8,10 @@
 
     <body>
         <p>Please enter your login and password</p><br>
-        <p>
+        
             
-          <a href=" /src/subscribe.php">Create Account</a>
+        <a href=" /src/subscribe.php">Create Account</a>
             
-            
-        </p>
         <?php 
            
             echo $error_msg;
