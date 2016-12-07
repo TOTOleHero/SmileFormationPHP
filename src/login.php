@@ -10,20 +10,28 @@ require_once('../lib/user-data.lib.php');
 require_once('../lib/checksession.lib.php');
 
 
-$login = $_POST["login"];
-$password = $_POST["password"];
-$error_msg = "";
-if (checkUser($login, $password)) {
+$error_msg = "";    
+
+if (isset($_POST["login"]) && isset($_POST["password"])) {
+
+    $login = $_POST["login"];
+    $password = $_POST["password"];
 
 
-    createSession();
+    
+    if (checkUser($login, $password)) {
 
-    header("Location: /src/showPlanning.php");
-} else {
 
-    $error_msg = 'login incorrect';
+        createSession();
+
+        header("Location: /src/showPlanning.php");
+    } else {
+
+        $error_msg = 'login incorrect';
+    }
 }
 
 
+include('../html/login.html.php');
 
-require('../html/login.html.php');
+
