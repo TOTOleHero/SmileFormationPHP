@@ -71,6 +71,11 @@ $app->post('/sendEmail',
         }
     }
 
+    if(count(array_keys($outputData)) < 5)
+    {
+        $outputData = "No data found";
+    }
+
 
     return $response->withJson($outputData);
 });
