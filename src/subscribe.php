@@ -1,6 +1,6 @@
 <?php
 
-require_once '../lib/user-data.lib.php';
+require '../lib/user-data.lib.php';
 include '../html/subscribe.html.php';
 
 if(isset($_POST['login']) && isset($_POST['password']) && isset($_POST['name'])){
