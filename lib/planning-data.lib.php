@@ -58,3 +58,14 @@ function getDataAtDate($date = null){
      
     
 }
+
+function createPLanning(){
+    
+}
+
+function updatePLanning(){
+    
+}
+function deletePLanning(){
+    
+}
