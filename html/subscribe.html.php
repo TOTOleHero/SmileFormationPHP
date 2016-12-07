@@ -7,7 +7,7 @@
     </head>
 
     <body>
-
+        <a href="login.php" >Se connecter</a>
         <form action="../src/subscribe.php" method="post">
         
         <p>Votre Nom : <input type="text" name="name" /></p>

@@ -15,7 +15,6 @@ if(isset($_POST['login']) && isset($_POST['password']) && isset($_POST['name']))
 
         if (createUser($login, $password, $name)){
             echo "le compte a été créé.";
-            ?> <a href="login.php" >Se connecter</a><?php
         }
         else{
             echo "l'utilisateur existe déjà";
