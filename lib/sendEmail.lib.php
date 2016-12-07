@@ -1,11 +1,15 @@
 <?php
 
 
-$data_string
+$data = [
+    	"firstName"=> "firstName",
+	"lastName"=> "lastName",
+	"email"=> "firstName.lastName",
+	"subject"=> "subject",
+	"body"=> "body"
+];
 
-    
-
-
+//$data_string =]son_encode($data);
 
 $ch = curl_init('http://localhost:8888/sendEmail');
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
