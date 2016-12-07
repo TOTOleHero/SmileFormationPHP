@@ -10,14 +10,12 @@ function createSession(){
 }
 
 function destroySession(){
-
+    session_start();
     $_SESSION = array();
     
     session_destroy();
-    
-    $_SESSION["connected"]=false;
-
-    return false;
+   
+    return true;
 }
 
 function isConnected(){
