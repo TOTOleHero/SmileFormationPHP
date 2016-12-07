@@ -4,56 +4,58 @@ define('USER_DATA', "../data/user.csv");
 define('INDEX_LOGIN', 0);
 define('INDEX_PW', 1);
 
+function createUser($login,$password, $name) {
 
-function createUser($login, $pw, $name) {
+    $convertedPassword = getConvertedPassword($password);
     
-    $exist_login=checkUserLogin($login);
-    $chaine="$login.','.$pw.','.$name";
+    $exist_login = checkUserLoginExist($login);
     
-    if(!$exist_login){
-          $fp=fopen(USER_DATA,"w"); 
-          if($fp){
-               fseek($fp,-1,SEEK_END);
-                fwrite($fp,$chaine);       
-                fclose($fp);
-          }
-         
-    }    
-    
-    return True;
+    if (!$exist_login) {
+
+        $dataToInsert = [
+            $login, // login of user
+            $convertedPassword, // sha1 of user's password
+            $name // full name for the user
+        ];
+
+        $fp = fopen(USER_DATA, "a+");
+        fputcsv($fp, $dataToInsert);
+        fclose($fp);
+        return True;
+    }
+
+    return False;
 }
+
 /**
  * vérifie que le login existe ou pas
  * @param string $login
  * @return boolean
  */
-function checkUserLogin($login){
-    $row = 1; 
-
+function checkUserLoginExist($login) {
+   
+    
     if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 
             // on saute la ligne d'entête en cherchant si la valeur est 'offset'
             if ($data[INDEX_LOGIN] == 'login') {
                 continue;
-            }  
-            
-            if(($login ==  $data[INDEX_LOGIN]) ){
-               fclose($handle);
-               return True;               
-            }                   
+            }
+
+            if ($login == $data[INDEX_LOGIN]) {
+                fclose($handle);
+                return True;
+            }
         }
         fclose($handle);
     }
     return False;
 }
 
-function checkUser($login, $pw) {
+function checkUser($login, $password) {
 
-    $sha1Password = sha1($pw);
-
-    $row = 1;
-   
+    $convertedPassword = getConvertedPassword($password);
 
     if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
@@ -61,13 +63,24 @@ function checkUser($login, $pw) {
             // on saute la ligne d'entête en cherchant si la valeur est 'offset'
             if ($data[INDEX_LOGIN] == 'login') {
                 continue;
-            }  
-            
-            if(($login ==  $data[INDEX_LOGIN]) && ($sha1Password == $data[INDEX_PW]) ){
-               return True;               
-            }                   
+            }
+
+            if ($login == $data[INDEX_LOGIN] && $convertedPassword == $data[INDEX_PW]) {
+                return True;
+            }
         }
     }
     return False;
 }
+
+
+/**
+ * converti un mot de passe en sha1
+ * @param string $password
+ * @return string
+ */
+function getConvertedPassword($password){
+   return sha1($password);
+}
+
 ?>

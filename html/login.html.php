@@ -9,9 +9,9 @@
     <body>
         <p>Veuillez entrer l'identifiant et le mot de passe :</p>
         <?php 
-          if (isset($error_msg)){
+           
             echo $error_msg;
-        }?>
+        ?>
 
         <form action="login.php" method="post">
             <p> 
