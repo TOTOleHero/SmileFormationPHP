@@ -71,7 +71,7 @@ $app->post('/sendEmail',
         }
     }
 
-    if(count(array_keys($outputData)) < 5)
+    if(count(array_keys($inputData)) < 5)
     {
         $outputData = "No data found";
     }
