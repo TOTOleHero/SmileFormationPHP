@@ -1,10 +1,8 @@
 <?php
-
 define('USER_DATA', __DIR__."/../data/user.csv");
 define('INDEX_LOGIN', 0);
 define('INDEX_PW', 1);
 define('INDEX_ROLE', 4);
-
 
 function createUser($login,$password, $name) {
 
@@ -75,13 +73,12 @@ function checkUser($login, $password) {
     return False;
 }
 
-
 /**
  * convertit un mot de passe en sha1
  * @param string $password
  * @return string
  */
-function getConvertedPassword($password){
+function getConvertedPassword($password) {
    return sha1($password);
 }
 
@@ -100,11 +97,12 @@ function hasRole($login, $role)
     return FALSE;
 }
 
-function getUser()
+function getUser($login)
 {
-    return [];
+    $allUsers = getAllUsers();
+    foreach ($allUsers as $value) {
+
+    }
+    return ;
 }
-
-
-
 ?>
