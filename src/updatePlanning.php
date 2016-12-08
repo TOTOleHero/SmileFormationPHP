@@ -2,7 +2,6 @@
 require '../lib/planning-data.lib.php';
 
 
-include('../html/updatePlanning.html.php');
 
 
 //echo $_POST['lineDate'];
@@ -18,4 +17,6 @@ include('../html/updatePlanning.html.php');
             updatePLanning($date, $label, $teacher);
         }
     }
+    include('../html/updatePlanning.html.php');
+
 ?>
