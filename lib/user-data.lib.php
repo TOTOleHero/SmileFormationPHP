@@ -152,6 +152,7 @@ function updateUser($login, $firstName, $lastName, $email, $phone) {
     $indexUser = null;
     foreach ($users as $index => $values) {
         if ($values['login'] == $login) {
+             $indexUser = $index;
             break;
         }
     }
@@ -159,9 +160,11 @@ function updateUser($login, $firstName, $lastName, $email, $phone) {
         $users[$indexUser]['firstName'] = $firstName;
         $users[$indexUser]['lastName'] = $lastName;
         $users[$indexUser]['email'] = $email;
-        $users[$indexUser]['tel'] = $tel;
+        $users[$indexUser]['tel'] = $phone;
         persistUserData($users);
         return TRUE;
     }
+    
+    echo 'nothing to do';
     return FALSE;
 }
