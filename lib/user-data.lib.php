@@ -119,23 +119,23 @@ function getUser($login)
 
 function getAllUser() {
 
-    $allUser = [][];
-
+    $allUser = [];
+    $row = 0;
     if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
             if ($data[INDEX_LOGIN] == 'login') {
                 continue;
             }
-            for ($row = 0; $row < count($data) - 1; $row++) {
-                $allUser[row]['login'] = $data[INDEX_LOGIN];
-                $allUser[row]['role'] = $data[INDEX_ROLE];
-                $allUser[row]['firstName'] = $data[INDEX_FIRST_N];
-                $allUser[row]['lastName'] = $data[INDEX_LAST_N];
-                $allUser[row]['email'] = $data[INDEX_EMAIL];
-                $allUser[row]['tel'] = $data[INDEX_TEL];
-            }
+
+            $allUser[$row]['login'] = $data[INDEX_LOGIN];
+            $allUser[$row]['role'] = $data[INDEX_ROLE];
+            $allUser[$row]['firstName'] = $data[INDEX_FIRST_N];
+            $allUser[$row]['lastName'] = $data[INDEX_LAST_N];
+            $allUser[$row]['email'] = $data[INDEX_EMAIL];
+            $allUser[$row]['tel'] = $data[INDEX_TEL];
+            $row++;
         }
-        return allUser;
+        return $allUser;
     }
 }
 
