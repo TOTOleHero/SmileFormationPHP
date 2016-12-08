@@ -11,7 +11,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
     if (checkUser($login, $password)) {
        
         createSession(getUser($login));
-        header("Location: /src/showPlanning.php");
+        header("Location: /src/Accueil.php");
     }
     else {
         $error_msg = 'login incorrect';
