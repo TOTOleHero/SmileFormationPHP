@@ -15,10 +15,10 @@
         </style>
     </head>
     <body>
+        <?php include __DIR__ . '/userName.part.html.php' ?>
         <table>
             <tr><th>login</th><th>mot de passe</th><th>prenom</th><th>nom</th><th>rôle</th><th>Email</th><th>téléphone</th></tr>
-            <?php 
-            foreach ($outputData as $outputLine) : ?>
+            <?php foreach ($outputData as $outputLine) : ?>
                 <tr>
                     <td><?php echo $outputLine['login'] ?></td>
                     <td><?php echo $outputLine['password'] ?></td>

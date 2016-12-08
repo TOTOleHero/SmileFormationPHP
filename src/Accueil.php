@@ -14,6 +14,7 @@ if (isConnected() !== TRUE) {
 $linkUserOk=false;
 $user = getUserSession();
 
+//var_dump('<pre>',$user);
 
 if (hasRole($user['login'],'ADMIN')) {
     

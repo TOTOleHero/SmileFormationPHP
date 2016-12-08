@@ -115,6 +115,10 @@ function createUser($login, $password, $role = 'USER', $firstName = '', $lastNam
         persistUserData($users);
         return True;
     }
+    else
+    {
+        echo 'user exist';
+    }
     return False;
 }
 

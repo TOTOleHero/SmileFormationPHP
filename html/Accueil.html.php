@@ -6,6 +6,7 @@
 
     <body>
 
+        <?php include __DIR__ . '/userName.part.html.php' ?>
         <a href='/src/showPlanning.php'>Voir le Planning</a><br/>
         <?php
         if ($linkUserOk == true) {

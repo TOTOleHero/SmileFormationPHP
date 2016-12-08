@@ -7,15 +7,14 @@
     </head>
 
     <body>
-        
-<img src="../img/stop.jpg" alt="STOP" />
-        
+
+        <img src="../img/stop.jpg" alt="STOP" />
+
     </body>
 
 </html>
 
 
-        
-        
-        
-        
+
+
+

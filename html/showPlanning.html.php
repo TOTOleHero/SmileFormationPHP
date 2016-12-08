@@ -15,6 +15,7 @@
         </style>
     </head>
     <body>
+        <?php include __DIR__ . '/userName.part.html.php' ?>
         <table>
 
             <tr>
@@ -27,35 +28,34 @@
                 <tr>
                     <td><?php echo $outputLine['date'] ?></td>
                     <td><?php echo $outputLine['label'] ?></td>
-                    <td><?php if(empty($outputLine['teacher'])) {
-                                echo "Non renseigne";}
-                              else {
-                                    echo $outputLine['teacher'];
-
-                              }  ?>
+                    <td><?php
+                        if (empty($outputLine['teacher'])) {
+                            echo "Non renseigne";
+                        } else {
+                            echo $outputLine['teacher'];
+                        }
+                        ?>
                     </td>
-                    
+
                     <td>
-                    <?php
-                    // si role Admin afficher cette partie
-                    if ($admin) {
-                        $lineDate = $outputLine['date'];                        
-                        $label = $outputLine['label'];
-                        If(empty($outputLine['teacher'])) {
-                               $teacher = "Non renseigne";}
-                              else {
-                                    $teacher = $outputLine['teacher'];
+                        <?php
+                        // si role Admin afficher cette partie
+                        if ($admin) {
+                            $lineDate = $outputLine['date'];
+                            $label = $outputLine['label'];
+                            If (empty($outputLine['teacher'])) {
+                                $teacher = "Non renseigne";
+                            } else {
+                                $teacher = $outputLine['teacher'];
+                            }
 
-                              }
-                        
-                        include 'modifDeletePlanningForm.html';
-
-                    }
-                    ?>   
+                            include 'modifDeletePlanningForm.html';
+                        }
+                        ?>   
                     </td>
 
 
-            <?php endforeach ?>
+                <?php endforeach ?>
 
 
         </table>
