@@ -1,11 +1,14 @@
-<form method="POST" name="form_update" action="showPlanning.php">
-   <input type="hidden" name="lineDate" value="<?php echo $lineDate?>" />
-    <input type="hidden" name="label" value="<?php echo $label?>" />
-    <input type="hidden" name="teacher" value="<?php echo $teacher?>" />
+<div><?php echo $err_message ?></div>
+
+<form method="POST" name="form_update" action="/src/updatePlanning.php">
+   
     
-    Date : <input type="text" name="Date" value="<?php echo $lineDate?>" />
-    Label : <input type="text" name="Label" value="<?php echo $label ?>"/>
-    Formateur : <input type="text" name="Teacher" value="<?php echo $teacher ?>" />
+    <input type="hidden" name="lineDate" value="<?php echo $lineDate?>" />
+    <input type="hidden" name="action" value="update" />
+    
+    Date : <?php echo $lineDate?><br/>
+    Label : <input type="text" name="label" value="<?php echo $label ?>"/><br/>
+    Formateur : <input type="text" name="teacher" value="<?php echo $teacher ?>" /><br/>
 
     <input type="submit" value="Mettre a jour" name="mettreAJour"/>
 </form>
