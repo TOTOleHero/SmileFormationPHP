@@ -102,7 +102,7 @@ function hasRole($login, $role)
 
 function getUser()
 {
-    return TRUE;
+    return [];
 }
 
 
