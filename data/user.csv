@@ -1,3 +1,5 @@
-login,password,firstName,lastName,role,email,tel
-thlec,5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8,Prenom,Nom,ADMIN,email@monemail.com,0123456789
-marc,5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8,Prenom,Nom,ADMIN,email@monemail.com,0123456789
+login,password,role,firstName,lastName,email,tel
+thlec,5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8,ADMIN,Prenom,Nom,email@monemail.com,0123456789
+marc,5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8,ADMIN,Prenom,Nom,email@monemail.com,0123456789
+test,a94a8fe5ccb19ba61c4c0873d391e987982fbbd3,
+test1,b444ac06613fc8d63795be9ad0beaf55011936ac,USER
