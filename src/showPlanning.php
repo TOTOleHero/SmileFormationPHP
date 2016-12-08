@@ -13,7 +13,41 @@ $admin=TRUE;
 $outputData = getData();
 $courseAtDate = getDataAtDate();
 include('../html/showPlanning.html.php');
-//
+
+actions();
+
+
+
+function actions() {
+
+    if (isset($_POST["delete"])) {
+         if (isset($_POST["lineDate"]) ){
+             deletePLanning($_POST['lineDate']);             
+         }        
+       
+    } else if (isset($_POST["update"])) {
+           
+         //       header("Location: /src/showPlanning.php");
+
+        
+        if (isset($_POST["Date"]) && isset($_POST["Label"]) && isset($_POST["Teacher"])) {
+            $date = $_POST["Date"];
+            $label = $_POST["Label"];
+            $teacher = $_POST["Teacher"];
+            updatePLanning($date, $label, $teacher);
+        }
+    } else if (isset($_POST["create"])) {
+        if (isset($_POST["Date"]) && isset($_POST["Label"]) && isset($_POST["Teacher"])) {
+            $date = $_POST["Date"];
+            $label = $_POST["Label"];
+            $teacher = $_POST["Teacher"];
+            createPLanning($date, $label, $teacher);
+        }
+    }
+}
+
+// 
+// //
 //if (isset($_POST["Date"] ) && isset($_POST["Label"] ) && isset($_POST["Formateur"] )){
 //    $date=$_POST["Date"];
 //    $label=$_POST["Label"];
@@ -26,5 +60,5 @@ include('../html/showPlanning.html.php');
 
 
 
-//updatePLanning($date, $cours, $nameFormater);
-//deletePLanning($_POST('lineData'));
+//updatePLanning[$date, $cours, $nameFormater];
+//deletePLanning($_POST['lineDate']);

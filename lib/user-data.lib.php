@@ -1,12 +1,19 @@
 <?php
 
 define('USER_DATA', __DIR__."/../data/user.csv");
+
 define('INDEX_LOGIN', 0);
 define('INDEX_PW', 1);
-define('INDEX_ROLE', 4);
+define('INDEX_ROLE', 2);
+define('INDEX_FIRST_N',3);
+define('INDEX_LAST_N', 4);
+define('INDEX_EMAIL', 5);
+define('INDEX_TEL', 6);
 
 
-function createUser($login,$password, $name) {
+function createUser($login, $password, $name, $role = 'USER') {
+
+
 
     $convertedPassword = getConvertedPassword($password);
 
@@ -17,7 +24,8 @@ function createUser($login,$password, $name) {
         $dataToInsert = [
             $login, // login of user
             $convertedPassword, // sha1 of user's password
-            $name // full name for the user
+            $name, // full name for the user
+            $role
         ];
 
         $fp = fopen(USER_DATA, "a+");
@@ -75,18 +83,18 @@ function checkUser($login, $password) {
     return False;
 }
 
-
 /**
  * convertit un mot de passe en sha1
  * @param string $password
  * @return string
  */
-function getConvertedPassword($password){
+function getConvertedPassword($password) {
+
    return sha1($password);
+
 }
 
-function hasRole($login, $role)
-{
+function hasRole($login, $role) {
     if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
             if ($data[INDEX_LOGIN] == 'login') {
@@ -100,11 +108,37 @@ function hasRole($login, $role)
     return FALSE;
 }
 
-function getUser()
+
+function getUser($login)
 {
-    return [];
+    $allUsers = getAllUser();
+    foreach ($allUsers as $value) {
+        if ($value['login'] == $login) {
+            return $value;
+        }
+        //var_dump("<pre>", $value);
+    }
+    return NULL;
 }
 
+function getAllUser() {
 
+    $allUser = [];
+    $row = 0;
+    if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            if ($data[INDEX_LOGIN] == 'login') {
+                continue;
+            }
+            $allUser[$row]['login'] = $data[INDEX_LOGIN];
+            $allUser[$row]['role'] = $data[INDEX_ROLE];
+            $allUser[$row]['firstName'] = $data[INDEX_FIRST_N];
+            $allUser[$row]['lastName'] = $data[INDEX_LAST_N];
+            $allUser[$row]['email'] = $data[INDEX_EMAIL];
+            $allUser[$row]['tel'] = $data[INDEX_TEL];
+            $row++;
+        }
+        return $allUser;
+    }
+}
 
-?>
