@@ -58,9 +58,9 @@ function createPLanning($date, $cours, $nameTeacher) {
         "teacher" => $nameTeacher
     ];
 
-    persistPlanningData($data);
 
-    return True;
+
+    return persistPlanningData($data);
 }
 
 /**
@@ -90,7 +90,7 @@ function getPlanningIndex($date) {
     return $findIndex;
 }
 /**
- * 
+ *
  * @param string $date format "YYYYMMDD"
  * @param string $label
  * @param string $teacher
@@ -127,16 +127,16 @@ function deletePLanning($date) {
 
     if ($findIndex !== null && is_int($findIndex)) {
         unset($data[$findIndex]);
-        persistPlanningData($data);
 
-        return True;
+
+        return persistPlanningData($data);
     }
     return false;
 }
 
 /**
  * persist PHP data on disk (persister les données php dans le dique)
- * @param array $data 
+ * @param array $data
  * [
  *       'date' => string format 'YYYYMMDD',
  *      "label" => string label ,
@@ -144,7 +144,12 @@ function deletePLanning($date) {
  * ]
  */
 function persistPlanningData(array $data) {
-    file_put_contents(SOURCE_PHP_FILE, serialize($data));
+    if(@file_put_contents(SOURCE_PHP_FILE, serialize($data))=== FALSE)
+    {
+        echo 'Pb de droit sur le fichier de données';
+        return false;
+    }
+    return true;
 }
 
 /**

@@ -37,19 +37,21 @@ else {
         $email = $_POST['email'];
         $phone = $_POST['tel'];
 
-      
+
         // j'appelle le modif du user
         $return_modif = updateUser($_POST['login'], $firstName, $lastName, $email, $phone);
 
         // j'ajoute un message si KO ou OK
         if ($return_modif !== TRUE) {
             //echo 'Modification non faite';
+            $userData = getUser($_POST['login']);
         } else {
-            //$userData = getUser($_POST['login']);
-         header("Location: /src/users.php");
+            
             //echo 'Modification faite';
-            
-            
+         header("Location: /src/users.php");
+
+
+
         }
     }
 }

@@ -35,7 +35,12 @@ function loadUserData() {
  * @param array $data
  */
 function persistUserData(array $data) {
-    file_put_contents(USERS_SOURCE_FILE, serialize($data));
+    if(@file_put_contents(USERS_SOURCE_FILE, serialize($data))=== FALSE)
+    {
+        echo 'Pb de droit sur le fichier de données';
+        return false;
+    }
+    return true;
 }
 
 /**
@@ -109,11 +114,11 @@ function createUser($login, $password, $role = 'USER', $firstName = '', $lastNam
             'email' => $email,
             'tel' => $phone
         ];
-        
-        
-        
-        persistUserData($users);
-        return True;
+
+
+
+
+        return persistUserData($users);
     }
     else
     {
@@ -165,10 +170,10 @@ function updateUser($login, $firstName, $lastName, $email, $phone) {
         $users[$indexUser]['lastName'] = $lastName;
         $users[$indexUser]['email'] = $email;
         $users[$indexUser]['tel'] = $phone;
-        persistUserData($users);
-        return TRUE;
+
+        return persistUserData($users);
     }
-    
+
     echo 'nothing to do';
     return FALSE;
 }
