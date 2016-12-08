@@ -11,7 +11,7 @@ require '../lib/planning-data.lib.php';
     $infos = getDataAtDate($lineDate);
     if($infos!== null)
     {
-        var_dump($infos);
+        
     $label = $infos['label'];
     $teacher = $infos['teacher'];
     }

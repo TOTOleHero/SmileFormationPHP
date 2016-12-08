@@ -17,7 +17,11 @@ $courseAtDate = $currentPlanningData['label'];
 
 $err_message=actions();
 
-
+/**
+ * fonction qui traite des actions admin
+ * delete, update, create
+ * @return string
+ */
 
 function actions() {
     
