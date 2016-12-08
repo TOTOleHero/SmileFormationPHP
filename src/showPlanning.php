@@ -26,5 +26,5 @@ include('../html/showPlanning.html.php');
 
 
 
-updatePLanning($_POST('lineData'));
-deletePLanning($_POST('lineData'));
+//updatePLanning($date, $cours, $nameFormater);
+//deletePLanning($_POST('lineData'));
