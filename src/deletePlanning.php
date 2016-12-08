@@ -11,6 +11,20 @@ $lineDate = "";
 $label = "";
 $teacher = "";
 
+
+ if (isset($_POST["lineDate"])){
+    $lineDate = $_POST["lineDate"];
+
+    $infos = getDataAtDate($lineDate);
+    if($infos!== null)
+    {
+        
+    $label = $infos['label'];
+    $teacher = $infos['teacher'];
+    }
+ }    
+ 
+ 
 if (isset($_POST["confirmDelete"])) {
 
 

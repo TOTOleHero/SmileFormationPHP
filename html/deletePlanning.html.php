@@ -10,10 +10,10 @@
     
     
     
-    Date : <?php echo $_POST['lineDate'];?>
-    <br />    Label : <?php echo $_POST['label'] ?>
-    <br />    Formateur : <?php echo $_POST['teacher']; ?>
-    <br />
+   Date : <input type="text" name="Date" value="<?php echo $lineDate?>" />
+    Label : <input type="text" name="Label" value="<?php echo $label ?>"/>
+    Formateur : <input type="text" name="Teacher" value="<?php echo $teacher ?>" />
+
     <input type="submit" value="Delete" name="confirmDelete"/>
 </form>
 
