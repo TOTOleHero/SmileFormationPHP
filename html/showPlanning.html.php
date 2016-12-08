@@ -39,7 +39,15 @@
                     <?php
                     // si role Admin afficher cette partie
                     if ($admin) {
-                        $lineDate = $outputLine['date'];
+                        $lineDate = $outputLine['date'];                        
+                        $label = $outputLine['label'];
+                        If(empty($outputLine['teacher'])) {
+                               $teacher = "Non renseigne";}
+                              else {
+                                    $teacher = $outputLine['teacher'];
+
+                              }
+                        
                         include 'modifDeletePlanningForm.html';
 
                     }
