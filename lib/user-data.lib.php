@@ -1,6 +1,6 @@
 <?php
 
-define('USER_DATA', "../data/user.csv");
+define('USER_DATA', __DIR__ . "/../data/user.csv");
 define('INDEX_LOGIN', 0);
 define('INDEX_PW', 1);
 define('INDEX_FIRST_N', 2);
@@ -9,14 +9,12 @@ define('INDEX_ROLE', 4);
 define('INDEX_EMAIL', 5);
 define('INDEX_TEL', 6);
 
-
-
-function createUser($login,$password, $name) {
+function createUser($login, $password, $name) {
 
     $convertedPassword = getConvertedPassword($password);
-    
+
     $exist_login = checkUserLoginExist($login);
-    
+
     if (!$exist_login) {
 
         $dataToInsert = [
@@ -40,8 +38,8 @@ function createUser($login,$password, $name) {
  * @return boolean
  */
 function checkUserLoginExist($login) {
-   
-    
+
+
     if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 
@@ -80,62 +78,39 @@ function checkUser($login, $password) {
     return False;
 }
 
-
 /**
  * convertit un mot de passe en sha1
  * @param string $password
  * @return string
  */
-function getConvertedPassword($password){
-   return sha1($password);
+function getConvertedPassword($password) {
+    return sha1($password);
 }
 
-function hasRole($login, $role)
-{
-    if (($handle = fopen(USER_DATA, "r")) !== FALSE)
-    {
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
-        {
-            if ($data[INDEX_LOGIN] == 'login')
-            {
+function hasRole($login, $role) {
+    if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            if ($data[INDEX_LOGIN] == 'login') {
                 continue;
             }
-            if ($data[INDEX_LOGIN] == $login && $data[INDEX_ROLE] == $role)
-            {
+            if ($data[INDEX_LOGIN] == $login && $data[INDEX_ROLE] == $role) {
                 return TRUE;
             }
-            return FALSE;
         }
     }
     return FALSE;
 }
 
-function getUser($login)
-{
-    $userInfo = [];
-    $allUser = getAllUser();
-    
-    foreach($allUser as $user){
-        if($user['login'] == $login){
-            return $user;
-        }
-    }
-}
+function getAllUser() {
 
-function getAllUser(){
-    
     $allUser = [][];
-    
-    if (($handle = fopen(USER_DATA, "r")) !== FALSE)
-    {
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE)
-        {
-            if ($data[INDEX_LOGIN] == 'login')
-            {
+
+    if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            if ($data[INDEX_LOGIN] == 'login') {
                 continue;
             }
-            for($row=0;$row<count($data)-1;$row++)
-            {
+            for ($row = 0; $row < count($data) - 1; $row++) {
                 $allUser[row]['login'] = $data[INDEX_LOGIN];
                 $allUser[row]['role'] = $data[INDEX_ROLE];
                 $allUser[row]['firstName'] = $data[INDEX_FIRST_N];
@@ -143,10 +118,7 @@ function getAllUser(){
                 $allUser[row]['email'] = $data[INDEX_EMAIL];
                 $allUser[row]['tel'] = $data[INDEX_TEL];
             }
-            
         }
-    return allUser;
+        return allUser;
     }
 }
-
-?>
