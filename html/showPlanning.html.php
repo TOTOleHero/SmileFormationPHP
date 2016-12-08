@@ -16,11 +16,40 @@
     </head>
     <body>
         <table>
-            <tr><th>Date</th><th>Cours</th></tr>
+
+            <tr>
+                <th>Date</th>
+                <th>Cours</th>
+                <th>Formateur</th>
+                <th>Actions</th>
+            </tr>
             <?php foreach ($outputData as $outputLine) : ?>
-                <tr><td><?php echo $outputLine['date'] ?></td>
-                    <td><?php echo $outputLine['label'] ?></td></tr>
+                <tr>
+                    <td><?php echo $outputLine['date'] ?></td>
+                    <td><?php echo $outputLine['label'] ?></td>
+                    <td><?php echo $outputLine['teacher'] ?></td>
+                    <td>
+                    <?php
+                    // si role Admin afficher cette partie
+                    if ($admin) {
+                        $lineDate = $outputLine['date'];
+                        include 'modifDeletePlanningForm.html';
+
+                    }
+                    ?>   
+                    </td>
+
+
             <?php endforeach ?>
+
+
         </table>
+        <?php
+        // si role Admin afficher cette partie
+        if ($admin) {
+            include 'createPlanningForm.html';
+        }
+        ?>
+
     </body>
 </html>

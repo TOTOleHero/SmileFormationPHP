@@ -22,7 +22,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
     if (checkUser($login, $password)) {
 
 
-        createSession();
+        createSession(getUser($login));
 
         header("Location: /src/showPlanning.php");
     } else {

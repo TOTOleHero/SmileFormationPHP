@@ -3,8 +3,8 @@
 /* Declaration of constants */
 
 // Source data file name
-define('SOURCE_CSV_FILE', __DIR__. '/../data/formation-planning.csv');
-define('SOURCE_PHP_FILE', __DIR__. '/../data/formation-planning.serialized-php.data');
+define('SOURCE_CSV_FILE', __DIR__ . '/../data/formation-planning.csv');
+define('SOURCE_PHP_FILE', __DIR__ . '/../data/formation-planning.serialized-php.data');
 
 // Start of data
 define('DATE_INDEX', 0);
@@ -38,18 +38,18 @@ function getDataAtDate($date = null) {
 
 function createPLanning($date, $cours, $nameTeacher) {
 
-    
+
     $data = loadPlanningData();
-    
+
     // TEST SI EXIST DEJA
-    
-    
+
+
     $data[] = [
-        "date"=>$date,
-        "label"=>$cours,
-        "teacher"=>$nameTeacher
+        "date" => $date,
+        "label" => $cours,
+        "teacher" => $nameTeacher
     ];
-    
+
     persistPlanningData($data);
 
     return True;
@@ -71,17 +71,20 @@ function persistPlanningData(array $data) {
     file_put_contents(SOURCE_PHP_FILE, serialize($data));
 }
 
-
 /**
  * laod PHP data from disk
 
  * @return array
  */
 function loadPlanningData() {
+
     $rawData = file_get_contents(SOURCE_PHP_FILE);
 
     $data = unserialize($rawData);
 
+    if (!is_array($data)) {
+        return [];
+    }
+
     return $data;
 }
-
