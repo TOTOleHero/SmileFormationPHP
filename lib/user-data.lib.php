@@ -1,10 +1,19 @@
 <?php
+
 define('USER_DATA', __DIR__."/../data/user.csv");
+
 define('INDEX_LOGIN', 0);
 define('INDEX_PW', 1);
+define('INDEX_FIRST_N', 2);
+define('INDEX_LAST_N', 3);
 define('INDEX_ROLE', 4);
+define('INDEX_EMAIL', 5);
+define('INDEX_TEL', 6);
+
 
 function createUser($login,$password, $name) {
+
+
 
     $convertedPassword = getConvertedPassword($password);
 
@@ -79,11 +88,12 @@ function checkUser($login, $password) {
  * @return string
  */
 function getConvertedPassword($password) {
+
    return sha1($password);
+
 }
 
-function hasRole($login, $role)
-{
+function hasRole($login, $role) {
     if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
             if ($data[INDEX_LOGIN] == 'login') {
@@ -97,6 +107,7 @@ function hasRole($login, $role)
     return FALSE;
 }
 
+
 function getUser($login)
 {
     $allUsers = getAllUsers();
@@ -106,3 +117,26 @@ function getUser($login)
     return ;
 }
 ?>
+
+function getAllUser() {
+
+    $allUser = [][];
+
+    if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            if ($data[INDEX_LOGIN] == 'login') {
+                continue;
+            }
+            for ($row = 0; $row < count($data) - 1; $row++) {
+                $allUser[row]['login'] = $data[INDEX_LOGIN];
+                $allUser[row]['role'] = $data[INDEX_ROLE];
+                $allUser[row]['firstName'] = $data[INDEX_FIRST_N];
+                $allUser[row]['lastName'] = $data[INDEX_LAST_N];
+                $allUser[row]['email'] = $data[INDEX_EMAIL];
+                $allUser[row]['tel'] = $data[INDEX_TEL];
+            }
+        }
+        return allUser;
+    }
+}
+
