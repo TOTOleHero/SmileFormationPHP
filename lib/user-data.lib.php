@@ -10,100 +10,31 @@ define('INDEX_EMAIL', 5);
 define('INDEX_TEL', 6);
 
 /**
- * @param $login
- * @param $password
- * @param $name
- * @param string $role
- * @return bool
- */
-function createUser($login, $password, $name, $role = 'USER') {
-    $convertedPassword = getConvertedPassword($password);
-    $exist_login = checkUserLoginExist($login);
-    if (!$exist_login) {
-
-        $dataToInsert = [
-            $login, // login of user
-            $convertedPassword, // sha1 of user's password
-            $name, // full name for the user
-            $role
-        ];
-        $fp = fopen(USER_DATA, "a+");
-        fputcsv($fp, $dataToInsert);
-        fclose($fp);
-        return True;
-    }
-    return False;
-}
-
-/**
- * vérifie que le login existe ou pas
- * @param string $login
- * @return boolean
- */
-function checkUserLoginExist($login) {
-    if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-            // on saute la ligne d'entête en cherchant si la valeur est 'offset'
-            if ($data[INDEX_LOGIN] == 'login') {
-                continue;
-            }
-            if ($login == $data[INDEX_LOGIN]) {
-                fclose($handle);
-                return True;
-            }
-        }
-        fclose($handle);
-    }
-    return False;
-}
-
-/**
- * @param $login
- * @param $password
- * @return bool
- */
-function checkUser($login, $password) {
-    $convertedPassword = getConvertedPassword($password);
-    if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-            // on saute la ligne d'entête en cherchant si la valeur est 'offset'
-            if ($data[INDEX_LOGIN] == 'login') {
-                continue;
-            }
-            if ($login == $data[INDEX_LOGIN] && $convertedPassword == $data[INDEX_PW]) {
-                return True;
-            }
-        }
-    }
-    return False;
-}
-
-/**
  * convertit un mot de passe en sha1
  * @param string $password
  * @return string
  */
 function getConvertedPassword($password) {
-   return sha1($password);
+    return sha1($password);
 }
 
 /**
- * @param $login
- * @param $role
- * @return bool
+ * @return array|mixed
  */
-function hasRole($login, $role) {
-    if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-            if ($data[INDEX_LOGIN] == 'login') {
-                continue;
-            }
-            if ($data[INDEX_LOGIN] == $login && $data[INDEX_ROLE] == $role) {
-                return TRUE;
-            }
-        }
+function loadUserData() {
+    $rawData = file_get_contents(USERS_SOURCE_FILE);
+    $data = unserialize($rawData);
+    if(!is_array($data)) {
+        return [];
     }
-    return FALSE;
+    return $data;
+}
+
+/**
+ * @param array $data
+ */
+function persistUserData(array $data) {
+    file_put_contents(USERS_SOURCE_FILE, serialize($data));
 }
 
 /**
@@ -123,27 +54,76 @@ function getUser($login) {
         if ($value['login'] == $login) {
             return $value;
         }
-        //var_dump("<pre>", $value);
     }
     return NULL;
 }
 
 /**
- * @param array $data
+ * vérifie que le login existe ou pas
+ * @param string $login
+ * @return boolean
  */
-function persistUserData(array $data) {
-    file_put_contents(USERS_SOURCE_FILE, serialize($data));
+function checkUserLoginExist($login) {
+    if (getUser($login) !== NULL) {
+        return TRUE;
+    }
+    return FALSE;
 }
 
+/**
+ * @param $login
+ * @param $role
+ * @return bool
+ */
+function hasRole($login, $role) {
+    $users = getAllUser();
+    foreach ($users as $value) {
+        if ($value['login'] == $login && $value['role'] == $role) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
 
 /**
- * @return array|mixed
+ * @param $login
+ * @param $password
+ * @param $name
+ * @param string $role
+ * @return bool
  */
-function loadUserData() {
-    $rawData = file_get_contents(USERS_SOURCE_FILE);
-    $data = unserialize($rawData);
-    if(!is_array($data)) {
-        return [];
+function createUser($login, $password, $role = 'USER', $firstName, $lastName, $email, $phone) {
+    $convertedPassword = getConvertedPassword($password);
+    $exist_login = checkUserLoginExist($login);
+    if (!$exist_login) {
+        $users = getAllUser();
+        $users[] = [
+            $login, $convertedPassword, $role, $firstName, $lastName, $email, $phone
+        ];
+        return True;
     }
-    return $data;
+    return False;
+}
+
+/**
+ * @param $login
+ * @param $password
+ * @return bool
+ */
+function checkUser($login, $password) {
+    $convertedPassword = getConvertedPassword($password);
+    $exist_login = checkUserLoginExist($login);
+    if (!$exist_login) {
+        $users = getAllUser();
+        foreach ($users as $value) {
+            if ($value['login'] == $login && $value['password'] == $convertedPassword) {
+                return True;
+            }
+        }
+    }
+    return False;
+}
+
+function updateUser($login, $firstName, $lastName, $email, $phone) {
+    // ToDo
 }
