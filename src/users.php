@@ -10,7 +10,7 @@ if (isConnected() !== TRUE) {
 $user = getUserSession();
 
 if (!hasRole($user['login'],'ADMIN')) {
-    include('../html/notAuthorize.php');
+    include('../html/notAuthorize.html.php');
     exit();
 }
 

@@ -16,6 +16,8 @@
     </head>
     <body>
         <?php include __DIR__ . '/userName.part.html.php' ?>
+        <a href="/src/Accueil.php">Accueil</a>
+
         <table>
 
             <tr>
