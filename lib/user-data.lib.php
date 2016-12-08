@@ -112,18 +112,42 @@ function createUser($login, $password, $role = 'USER', $firstName, $lastName, $e
  */
 function checkUser($login, $password) {
     $convertedPassword = getConvertedPassword($password);
-    $exist_login = checkUserLoginExist($login);
-    if (!$exist_login) {
-        $users = getAllUser();
-        foreach ($users as $value) {
-            if ($value['login'] == $login && $value['password'] == $convertedPassword) {
-                return True;
-            }
+    $users = getAllUser();
+    foreach ($users as $value) {
+        if ($value['login'] == $login && $value['password'] == $convertedPassword) {
+            return True;
         }
     }
     return False;
 }
 
+/**
+ * Updates user's data
+ * @param $login
+ * @param $firstName
+ * @param $lastName
+ * @param $email
+ * @param $phone
+ * @return bool
+ */
 function updateUser($login, $firstName, $lastName, $email, $phone) {
-    // ToDo
+    if (checkUserLoginExist($login) !== TRUE) {
+        return FALSE;
+    }
+    $users = loadUserData();
+    $indexUser = null;
+    foreach ($users as $index => $values) {
+        if ($values['login'] == $login) {
+            break;
+        }
+    }
+    if($indexUser !== null && is_int($indexUser)) {
+        $users[$indexUser]['firstName'] = $firstName;
+        $users[$indexUser]['lastName'] = $lastName;
+        $users[$indexUser]['email'] = $email;
+        $users[$indexUser]['tel'] = $tel;
+        persistUserData($users);
+        return TRUE;
+    }
+    return FALSE;
 }
