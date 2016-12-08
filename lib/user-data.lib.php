@@ -110,11 +110,14 @@ function hasRole($login, $role) {
 
 function getUser($login)
 {
-    $allUsers = getAllUsers();
+    $allUsers = getAllUser();
     foreach ($allUsers as $value) {
-
+        if ($value['login'] == $login) {
+            return $value;
+        }
+        //var_dump("<pre>", $value);
     }
-    return ;
+    return NULL;
 }
 
 function getAllUser() {
@@ -126,7 +129,6 @@ function getAllUser() {
             if ($data[INDEX_LOGIN] == 'login') {
                 continue;
             }
-
             $allUser[$row]['login'] = $data[INDEX_LOGIN];
             $allUser[$row]['role'] = $data[INDEX_ROLE];
             $allUser[$row]['firstName'] = $data[INDEX_FIRST_N];
