@@ -11,8 +11,9 @@ $admin=TRUE;
 
 
 $outputData = getData();
-$courseAtDate = getDataAtDate();
-include('../html/showPlanning.html.php');
+$currentPlanningData = getDataAtDate();
+$courseAtDate = $currentPlanningData['label'];
+
 
 $err_message=actions();
 
@@ -43,6 +44,7 @@ function actions() {
             $label = $_POST["Label"];
             $teacher = $_POST["Teacher"];
             createPLanning($date, $label, $teacher);
+             header("Location: /src/showPlanning.php");
         }
     }
     
@@ -65,3 +67,4 @@ function actions() {
 
 //updatePLanning[$date, $cours, $nameFormater];
 //deletePLanning($_POST['lineDate']);
+include('../html/showPlanning.html.php');
