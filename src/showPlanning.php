@@ -14,11 +14,13 @@ $outputData = getData();
 $courseAtDate = getDataAtDate();
 include('../html/showPlanning.html.php');
 
-actions();
+$err_message=actions();
 
 
 
 function actions() {
+    
+    $err_message = "";
 
     if (isset($_POST["delete"])) {
          if (isset($_POST["lineDate"]) ){
@@ -27,15 +29,14 @@ function actions() {
        
     } else if (isset($_POST["update"])) {
            
-         //       header("Location: /src/showPlanning.php");
 
         
-        if (isset($_POST["Date"]) && isset($_POST["Label"]) && isset($_POST["Teacher"])) {
-            $date = $_POST["Date"];
-            $label = $_POST["Label"];
-            $teacher = $_POST["Teacher"];
-            updatePLanning($date, $label, $teacher);
-        }
+//        if (isset($_POST["Date"]) && isset($_POST["Label"]) && isset($_POST["Teacher"])) {
+//            $date = $_POST["Date"];
+//            $label = $_POST["Label"];
+//            $teacher = $_POST["Teacher"];
+//            updatePLanning($date, $label, $teacher);
+//        }
     } else if (isset($_POST["create"])) {
         if (isset($_POST["Date"]) && isset($_POST["Label"]) && isset($_POST["Teacher"])) {
             $date = $_POST["Date"];
@@ -44,6 +45,8 @@ function actions() {
             createPLanning($date, $label, $teacher);
         }
     }
+    
+    return $err_message;
 }
 
 // 
