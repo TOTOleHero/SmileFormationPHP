@@ -14,7 +14,6 @@ define('LABEL_INDEX', 1);
  * Function that returns an array containing dates in YYYYMMDD format and course name
  */
 
-
 function getData() {
     return loadPlanningData();
 }
@@ -35,12 +34,9 @@ function getDataAtDate($date = null) {
             return $value['label'];
         }
     }
-    
+
     return null;
 }
-
-
-
 
 /**
  * Créer un nouveau planning
@@ -52,8 +48,7 @@ function getDataAtDate($date = null) {
 function createPLanning($date, $cours, $nameTeacher) {
     $data = loadPlanningData();
 
-    if(getDataAtDate($date) !== null)
-    {
+    if (getDataAtDate($date) !== null) {
         return false;
     }
 
@@ -67,6 +62,7 @@ function createPLanning($date, $cours, $nameTeacher) {
 
     return True;
 }
+
 /**
  * Mettre à jour un planning
  * @param type $date
@@ -74,31 +70,7 @@ function createPLanning($date, $cours, $nameTeacher) {
  * @param type $nameTeacher
  * @return boolean
  */
-
-
-function updatePLanning($date, $cours, $nameTeacher) {
-    $data = loadPlanningData();
-
-    foreach ($data as $index => $values) {
-
-        $values[$index]["date"] = $date;
-        $values[$index]["cours"] = $cours;
-        $values[$index]["nameTeacher"] = $nameTeacher;
-    }
-
-    persistPlanningData($data);
-    return True;
-
-}
-
-
-/**
- * Supprimer un planning référencé par sa date
- * @param type $date
- * @return boolean
- */
-function deletePLanning($date) {
-
+function getPlanningIndex($date) {
     $data = loadPlanningData();
 
     $findIndex = null;
@@ -115,6 +87,43 @@ function deletePLanning($date) {
         }
     }
 
+    return $findIndex;
+}
+/**
+ * 
+ * @param string $date format "YYYYMMDD"
+ * @param string $label
+ * @param string $teacher
+ * @return boolean TRUE if updated FALSE otherwise
+ */
+function updatePLanning($date, $label, $teacher) {
+
+    $data = loadPlanningData();
+    $findIndex = getPlanningIndex($date);
+
+    if ($findIndex !== null && is_int($findIndex)) {
+        $data[$findIndex]["label"] = $label;
+        $data[$findIndex]["teacher"] = $teacher;
+
+
+        persistPlanningData($data);
+
+        return True;
+    }
+
+    return false;
+}
+
+/**
+ * Supprimer un planning référencé par sa date
+ * @param type $date
+ * @return boolean
+ */
+function deletePLanning($date) {
+
+    $data = loadPlanningData();
+
+    $findIndex = getPlanningIndex($date);
 
     if ($findIndex !== null && is_int($findIndex)) {
         unset($data[$findIndex]);
@@ -123,7 +132,6 @@ function deletePLanning($date) {
         return True;
     }
     return false;
-
 }
 
 /**
