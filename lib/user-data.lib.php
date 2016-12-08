@@ -1,6 +1,6 @@
 <?php
 
-define('USER_DATA', "../data/user.csv");
+define('USER_DATA', __DIR__."/../data/user.csv");
 define('INDEX_LOGIN', 0);
 define('INDEX_PW', 1);
 define('INDEX_ROLE', 4);
@@ -9,9 +9,9 @@ define('INDEX_ROLE', 4);
 function createUser($login,$password, $name) {
 
     $convertedPassword = getConvertedPassword($password);
-    
+
     $exist_login = checkUserLoginExist($login);
-    
+
     if (!$exist_login) {
 
         $dataToInsert = [
@@ -35,8 +35,8 @@ function createUser($login,$password, $name) {
  * @return boolean
  */
 function checkUserLoginExist($login) {
-   
-    
+
+
     if (($handle = fopen(USER_DATA, "r")) !== FALSE) {
         while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 
