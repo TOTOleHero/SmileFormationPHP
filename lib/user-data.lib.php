@@ -4,14 +4,14 @@ define('USER_DATA', __DIR__."/../data/user.csv");
 
 define('INDEX_LOGIN', 0);
 define('INDEX_PW', 1);
-define('INDEX_FIRST_N', 2);
-define('INDEX_LAST_N', 3);
-define('INDEX_ROLE', 4);
+define('INDEX_ROLE', 2);
+define('INDEX_FIRST_N',3);
+define('INDEX_LAST_N', 4);
 define('INDEX_EMAIL', 5);
 define('INDEX_TEL', 6);
 
 
-function createUser($login,$password, $name) {
+function createUser($login, $password, $name, $role = 'USER') {
 
 
 
@@ -24,7 +24,8 @@ function createUser($login,$password, $name) {
         $dataToInsert = [
             $login, // login of user
             $convertedPassword, // sha1 of user's password
-            $name // full name for the user
+            $name, // full name for the user
+            $role
         ];
 
         $fp = fopen(USER_DATA, "a+");
