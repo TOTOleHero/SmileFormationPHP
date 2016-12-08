@@ -116,7 +116,6 @@ function getUser($login)
     }
     return ;
 }
-?>
 
 function getAllUser() {
 
