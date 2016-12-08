@@ -27,7 +27,14 @@
                 <tr>
                     <td><?php echo $outputLine['date'] ?></td>
                     <td><?php echo $outputLine['label'] ?></td>
-                    <td><?php echo $outputLine['teacher'] ?></td>
+                    <td><?php if(empty($outputLine['teacher'])) {
+                                echo "Non renseigne";}
+                              else {
+                                    echo $outputLine['teacher'];
+
+                              }  ?>
+                    </td>
+                    
                     <td>
                     <?php
                     // si role Admin afficher cette partie
