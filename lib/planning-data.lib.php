@@ -38,29 +38,29 @@ function getDataAtDate($date = null) {
 
 function createPLanning($date, $cours, $nameTeacher) {
 
-    
+
     $data = loadPlanningData();
-    
+
     // TEST SI EXIST DEJA
-    
-    
+
+
     $data[] = [
         "date"=>$date,
         "label"=>$cours,
         "teacher"=>$nameTeacher
     ];
-    
+
     persistPlanningData($data);
 
     return True;
 }
 
 function updatePLanning($date, $cours, $nameFormater) {
-    
+
 }
 
 function deletePLanning($date) {
-    
+
 }
 
 /**
@@ -78,10 +78,17 @@ function persistPlanningData(array $data) {
  * @return array
  */
 function loadPlanningData() {
+
+
+
     $rawData = file_get_contents(SOURCE_PHP_FILE);
 
     $data = unserialize($rawData);
 
+    if(!is_array($data))
+    {
+        return [];
+    }
     return $data;
 }
 
