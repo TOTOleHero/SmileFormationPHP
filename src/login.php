@@ -9,6 +9,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
     $login = $_POST["login"];
     $password = $_POST["password"];
     if (checkUser($login, $password)) {
+       
         createSession(getUser($login));
         header("Location: /src/showPlanning.php");
     }

@@ -13,11 +13,11 @@ if(isset($_POST['login']) && isset($_POST['password']) && isset($_POST['name']))
     if (!empty($login) && !empty($password) && !empty($name)) {
 
         if (preg_match('/^[a-zA-Z0-9_-]/',$login)){
-            if (createUser($login, $password, $name)){
+            if (createUser($login, $password)){
             echo "le compte a été créé.";
             }
             else{
-                echo "l'utilisateur existe déjà";
+                echo "Erreur de création de l'utilisateur";
             }
         }
         else{

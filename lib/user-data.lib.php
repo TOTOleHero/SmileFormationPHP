@@ -1,6 +1,7 @@
 <?php
-define('USERS_SOURCE_FILE', __DIR__. '/../data/users.serialized-php.data');
-define('USER_DATA', __DIR__."/../data/user.csv");
+
+define('USERS_SOURCE_FILE', __DIR__ . '/../data/users.serialized-php.data');
+define('USER_DATA', __DIR__ . "/../data/user.csv");
 define('INDEX_LOGIN', 0);
 define('INDEX_PW', 1);
 define('INDEX_ROLE', 2);
@@ -24,7 +25,7 @@ function getConvertedPassword($password) {
 function loadUserData() {
     $rawData = file_get_contents(USERS_SOURCE_FILE);
     $data = unserialize($rawData);
-    if(!is_array($data)) {
+    if (!is_array($data)) {
         return [];
     }
     return $data;
@@ -92,14 +93,26 @@ function hasRole($login, $role) {
  * @param string $role
  * @return bool
  */
-function createUser($login, $password, $role = 'USER', $firstName, $lastName, $email, $phone) {
+function createUser($login, $password, $role = 'USER', $firstName = '', $lastName = '', $email = '', $phone = '') {
     $convertedPassword = getConvertedPassword($password);
     $exist_login = checkUserLoginExist($login);
+
     if (!$exist_login) {
-        $users = getAllUser();
+        $users = loadUserData();
+
         $users[] = [
-            $login, $convertedPassword, $role, $firstName, $lastName, $email, $phone
+            'login' => $login,
+            'password' => $convertedPassword,
+            'role' => $role,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'tel' => $phone
         ];
+        
+        
+        
+        persistUserData($users);
         return True;
     }
     return False;
@@ -111,6 +124,7 @@ function createUser($login, $password, $role = 'USER', $firstName, $lastName, $e
  * @return bool
  */
 function checkUser($login, $password) {
+
     $convertedPassword = getConvertedPassword($password);
     $users = getAllUser();
     foreach ($users as $value) {
@@ -141,7 +155,7 @@ function updateUser($login, $firstName, $lastName, $email, $phone) {
             break;
         }
     }
-    if($indexUser !== null && is_int($indexUser)) {
+    if ($indexUser !== null && is_int($indexUser)) {
         $users[$indexUser]['firstName'] = $firstName;
         $users[$indexUser]['lastName'] = $lastName;
         $users[$indexUser]['email'] = $email;
