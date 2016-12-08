@@ -31,7 +31,7 @@ function getDataAtDate($date = null) {
 
     foreach ($data as $value) {
         if ($value['date'] == $date) {
-            return $value['label'];
+            return $value;
         }
     }
 
