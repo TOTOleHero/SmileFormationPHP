@@ -75,6 +75,7 @@ function createPLanning($date, $cours, $nameTeacher) {
  * @return boolean
  */
 
+
 function updatePLanning($date, $cours, $nameTeacher) {
     $data = loadPlanningData();
 
@@ -87,6 +88,7 @@ function updatePLanning($date, $cours, $nameTeacher) {
 
     persistPlanningData($data);
     return True;
+
 }
 
 
@@ -96,6 +98,7 @@ function updatePLanning($date, $cours, $nameTeacher) {
  * @return boolean
  */
 function deletePLanning($date) {
+
     $data = loadPlanningData();
 
     $findIndex = null;
@@ -120,6 +123,7 @@ function deletePLanning($date) {
         return True;
     }
     return false;
+
 }
 
 /**
@@ -146,8 +150,6 @@ function persistPlanningData(array $data) {
  */
 function loadPlanningData() {
 
-
-
     $rawData = file_get_contents(SOURCE_PHP_FILE);
 
     $data = unserialize($rawData);
@@ -155,5 +157,6 @@ function loadPlanningData() {
     if (!is_array($data)) {
         return [];
     }
+
     return $data;
 }
