@@ -15,6 +15,8 @@
         </style>
     </head>
     <body>
+        
+        <a href="/src/Accueil.php">Accueil</a>
         <table>
 
             <tr>
